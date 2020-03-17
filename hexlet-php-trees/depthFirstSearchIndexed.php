@@ -6,11 +6,13 @@
 
 $dfs = function ($tree) use (&$dfs) {
   $name = $tree[0];
+  $childs = $tree[1] ?? null;
+
   echo "Node name is $name \n";
 
-  if (isset($tree[1])) {
-    echo "node has child\n\n";
-    array_map($dfs, $tree[1]);
+  if ($childs) {
+    echo "node has childs\n\n";
+    array_map($dfs, $childs);
   }
 };
 
