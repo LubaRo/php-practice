@@ -16,6 +16,18 @@ $dfs = function ($tree) use (&$dfs) {
   }
 };
 
+/* TREE:
+       A
+     / | \
+    B  E  F
+   / \   / \
+  C  D  G  H
+          / \
+         I  J
+           / \
+          K   L
+*/
+
 $tree = ['A', [
   ['B', [['C'], ['D']]],
   ['E'],
