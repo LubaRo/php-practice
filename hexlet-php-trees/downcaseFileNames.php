@@ -8,19 +8,18 @@ function isFile($node)
 
 function downcaseFileNames($tree)
 {
-    $dfs = function ($tree) use (&$dfs) {
-        if (isFile($tree)) {
-            $name = $tree['name'] ?? '';
-            $tree['name'] = strtolower($name);
-            return $tree;
+    $downcaseFileNames = function ($node) use (&$downcaseFileNames) {
+        if (isFile($node)) {
+            $name = $node['name'] ?? '';
+            return array_merge($node, ['name' => strtolower($name)]);
         }
-        $children = $tree['children'] ?? [];
-        $tree['children'] = array_map($dfs, $children);
+        $children = $node['children'] ?? [];
+        $updatedChildren = array_map($downcaseFileNames, $children);
 
-        return $tree;
+        return array_merge($node, ['children' => $updatedChildren]);
     };
 
-    return $dfs($tree);
+    return $downcaseFileNames($tree);
 }
 
 
