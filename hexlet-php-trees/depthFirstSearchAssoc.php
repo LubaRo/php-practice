@@ -6,13 +6,13 @@
 
 $dfs = function($tree) use (&$dfs) {
     $name = $tree['name'];
-    $childs = $tree['childs'] ?? null;
+    $children = $tree['children'] ?? null;
 
     echo "Node name is $name\n";
 
-    if ($childs) {
-        echo "Node has childs\n\n";
-        array_map($dfs, $childs);
+    if ($children) {
+        echo "Node has children\n\n";
+        array_map($dfs, $children);
     }
 };
 
@@ -31,17 +31,17 @@ $dfs = function($tree) use (&$dfs) {
 
 $tree = [
     'name' => 'A',
-    'childs' => [
-        ['name' => 'B', 'childs' => [
+    'children' => [
+        ['name' => 'B', 'children' => [
             ['name' => 'C'],
             ['name' => 'D']
         ]],
         ['name' => 'E'],
-        ['name' => 'F', 'childs' => [
+        ['name' => 'F', 'children' => [
             ['name' => 'G'],
-            ['name' => 'H', 'childs' => [
+            ['name' => 'H', 'children' => [
                 ['name' => 'I'],
-                ['name' => 'J', 'childs' => [
+                ['name' => 'J', 'children' => [
                     ['name' => 'K'],
                     ['name' => 'L']
                 ]]
