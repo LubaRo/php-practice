@@ -5,8 +5,7 @@
 */
 
 $dfs = function($tree) use (&$dfs) {
-    $name = $tree['name'];
-    $children = $tree['children'] ?? null;
+    ['name' => $name, 'children' => $children] = $tree;
 
     echo "Node name is $name\n";
 
@@ -33,17 +32,17 @@ $tree = [
     'name' => 'A',
     'children' => [
         ['name' => 'B', 'children' => [
-            ['name' => 'C'],
-            ['name' => 'D']
+            ['name' => 'C', 'children' => []],
+            ['name' => 'D', 'children' => []]
         ]],
-        ['name' => 'E'],
+        ['name' => 'E', 'children' => []],
         ['name' => 'F', 'children' => [
-            ['name' => 'G'],
+            ['name' => 'G', 'children' => []],
             ['name' => 'H', 'children' => [
-                ['name' => 'I'],
+                ['name' => 'I', 'children' => []],
                 ['name' => 'J', 'children' => [
-                    ['name' => 'K'],
-                    ['name' => 'L']
+                    ['name' => 'K', 'children' => []],
+                    ['name' => 'L', 'children' => []]
                 ]]
             ]]
         ]]
