@@ -7,7 +7,7 @@
 
 function map(callable $func, array $tree)
 {
-    $map = function ($func, $node) use (&$map) {
+    $map = function ($node) use (&$map, $func) {
         $children = $node['children'] ?? [];
         $updatedNode = $func($node);
 
@@ -15,14 +15,12 @@ function map(callable $func, array $tree)
             return $updatedNode;
         }
 
-        $updatedChildren = array_map(function ($node) use ($map, $func) {
-            return $map($func, $node);
-        }, $children);
+        $updatedChildren = array_map($map, $children);
 
         return array_merge($updatedNode, ['children' => $updatedChildren]);
     };
 
-    return $map($func, $tree);
+    return $map($tree);
 }
 /* TREE:
        A
@@ -39,28 +37,32 @@ function map(callable $func, array $tree)
 $tree = [
     'name' => '/',
     'type' => 'directory',
-    'meta' => [],
+    'meta' => [
+        'old' => 'root meta'
+    ],
     'children' => [
         [
-            'name' => 'ETC',
+            'name' => 'etc',
             'type' => 'directory',
             'meta' => [],
             'children' => [
             [
-                'name' => 'NGINX',
+                'name' => 'nGinX',
                 'type' => 'directory',
-                'meta' => [],
+                'meta' => [
+                    'old' => 'nginx meta'
+                ],
                 'children' => [],
             ],
             [
-                'name' => 'CONSUL',
+                'name' => 'conSUL',
                 'type' => 'directory',
                 'meta' => [],
                 'children' => [['name' => 'CONFIG.JSON', 'type' => 'file', 'meta' => []]],
             ],
             ],
         ],
-        ['name' => 'HOSTS', 'type' => 'file', 'meta' => []],
+        ['name' => 'HOsts', 'type' => 'file', 'meta' => []],
     ],
 ];
 
