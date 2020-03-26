@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/secondaryFunc.php";
+
 /* Count directories in the tree */
 
 function reduce(callable $func, array $tree, $acc)
@@ -18,12 +20,6 @@ function reduce(callable $func, array $tree, $acc)
     };
 
     return $reduce(0, $tree);
-}
-
-function isDirectory(array $node): string
-{
-    $type = $node['type'] ?? 'undefined';
-    return $type === 'directory';
 }
 
 /* TREE:

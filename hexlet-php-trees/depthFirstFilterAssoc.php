@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . "/secondaryFunc.php";
 /*  Bypass all array elements
     applying the passed handler function
     to each node of the tree and also filter null elements
@@ -6,7 +8,6 @@
 function filter(callable $func, array $tree)
 {
     $filter = function ($tree) use ($func, &$filter) {
-        print_r($func($tree));
         if (!$func($tree)) {
             return null;
         }
@@ -31,11 +32,6 @@ function filter(callable $func, array $tree)
     return $filter($tree);
 }
 
-function isDirectory($node)
-{
-    $type = $node['type'] ?? 'undefinded';
-    return $type === 'directory';
-}
 /* TREE:
            [root]
       /      |      \
