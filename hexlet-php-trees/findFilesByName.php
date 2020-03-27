@@ -7,19 +7,16 @@ require_once __DIR__ . "/secondaryFunc.php";
 function findFilesByName($tree, $substring)
 {
     $findFilesByName = function ($node, $filePath, $acc) use (&$findFilesByName, $substring) {
+        $name = $node['name'] ?? '';
         if (isFile($node)) {
-            //check filename by substring and add to $acc
-            $name = $node['name'] ?? '';
-
             if (strpos($name, $substring) !== false) {
                 $acc[] = $filePath . $name;
             }
             return $acc;
         }
 
-        $dirName = $node['name'] ?? '';
-        $delimetr = $dirName == '/' ? '' : '/';
-        $filePath .= "$dirName" . $delimetr;
+        $delimetr = $name == '/' ? '' : '/';
+        $filePath .= "$name" . $delimetr;
 
         $children = $node['children'] ?? [];
         if (empty($children)) {
